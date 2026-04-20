@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arfan Amrullah — Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0D0D0D; --paper: #F5F2EA; --accent: #FF3D00; --accent2: #FFD600;
+    --mid: #1A1A1A; --muted: #6B6760; --border: #0D0D0D; --card-bg: #FFFFFF;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: var(--paper); border-bottom: 1.5px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { font-size: 0.85rem; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { background: var(--ink); color: var(--paper) !important; padding: 0.5rem 1.25rem; border: 1.5px solid var(--ink); transition: background 0.2s, color 0.2s !important; }
+  .nav-cta:hover { background: var(--accent) !important; border-color: var(--accent); color: #fff !important; }
+
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1.5px solid var(--border); margin-top: 64px; }
+  .hero-left { padding: 6rem 3rem 4rem; display: flex; flex-direction: column; justify-content: space-between; border-right: 1.5px solid var(--border); }
+  .hero-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent2); color: var(--ink); font-size: 0.75rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.35rem 0.85rem; border: 1.5px solid var(--ink); width: fit-content; margin-bottom: 2.5rem; }
+  .hero-tag::before { content: ''; display: inline-block; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+  .hero-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3.5rem, 7vw, 6rem); line-height: 0.95; letter-spacing: -0.04em; color: var(--ink); }
+  .hero-name em { display: block; font-style: normal; color: var(--accent); }
+  .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 4rem; }
+  .hero-desc { font-size: 1rem; font-weight: 300; line-height: 1.7; color: var(--muted); max-width: 280px; }
+  .hero-scroll { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); writing-mode: vertical-rl; text-orientation: mixed; display: flex; align-items: center; gap: 0.5rem; }
+  .hero-scroll::after { content: ''; display: block; width: 1px; height: 60px; background: var(--muted); }
+  .hero-right { background: var(--ink); display: flex; flex-direction: column; padding: 6rem 3rem 4rem; position: relative; overflow: hidden; }
+  .hero-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0; flex: 1; align-content: end; }
+  .stat-block { padding: 2rem; border: 1px solid #2A2A2A; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: var(--accent2); line-height: 1; display: block; }
+  .stat-label { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: #888; margin-top: 0.4rem; display: block; }
+  .hero-visual { width: 160px; height: 160px; border-radius: 50%; background: var(--accent); position: absolute; top: 4rem; right: 3rem; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 3px solid var(--accent2); }
+  .hero-initials { font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800; color: #fff; letter-spacing: -0.04em; }
+
+  .about { display: grid; grid-template-columns: 1fr 2fr; border-bottom: 1.5px solid var(--border); }
+  .section-label { padding: 4rem 3rem; border-right: 1.5px solid var(--border); writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; }
+  .about-content { padding: 5rem 3rem; }
+  .about-headline { font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 2rem; }
+  .about-headline span { color: var(--accent); }
+  .about-body { font-size: 1.05rem; line-height: 1.8; color: var(--muted); max-width: 560px; font-weight: 300; }
+  .about-skills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.5rem; }
+  .skill-tag { font-size: 0.8rem; letter-spacing: 0.06em; border: 1.5px solid var(--border); padding: 0.4rem 0.9rem; font-weight: 400; transition: background 0.2s, color 0.2s; }
+  .skill-tag:hover { background: var(--ink); color: var(--paper); cursor: default; }
+
+  .work { border-bottom: 1.5px solid var(--border); }
+  .work-header { padding: 3rem; border-bottom: 1.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+  .work-header h2 { font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .work-count { font-family: 'Syne', sans-serif; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--muted); }
+  .work-grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .work-card { border-right: 1.5px solid var(--border); border-bottom: 1.5px solid var(--border); overflow: hidden; cursor: pointer; position: relative; }
+  .work-card:nth-child(even) { border-right: none; }
+  .work-card:nth-last-child(-n+2) { border-bottom: none; }
+  .work-thumb { width: 100%; aspect-ratio: 16/10; display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-size: 4rem; font-weight: 800; letter-spacing: -0.05em; position: relative; overflow: hidden; transition: transform 0.4s ease; }
+  .work-card:hover .work-thumb { transform: scale(1.04); }
+  .work-thumb.t1 { background: var(--accent); color: var(--accent2); }
+  .work-thumb.t2 { background: #0A0A0A; color: var(--accent); }
+  .work-thumb.t3 { background: var(--accent2); color: var(--ink); }
+  .work-thumb.t4 { background: #1A1A2E; color: #E0E0E0; }
+  .work-info { padding: 1.5rem 2rem 2rem; border-top: 1.5px solid var(--border); }
+  .work-cat { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 400; margin-bottom: 0.4rem; display: block; }
+  .work-title { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; letter-spacing: -0.02em; color: var(--ink); }
+
+  .services { border-bottom: 1.5px solid var(--border); }
+  .services-header { padding: 3rem; border-bottom: 1.5px solid var(--border); }
+  .services-header h2 { font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .services-list { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .service-item { padding: 3rem; border-right: 1.5px solid var(--border); position: relative; overflow: hidden; transition: background 0.3s; }
+  .service-item:last-child { border-right: none; }
+  .service-item:hover { background: var(--ink); }
+  .service-item:hover .service-title, .service-item:hover .service-desc, .service-item:hover .service-num { color: var(--paper); }
+  .service-item:hover .service-line { background: var(--accent); }
+  .service-num { font-family: 'Syne', sans-serif; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 2rem; transition: color 0.3s; }
+  .service-line { width: 30px; height: 2px; background: var(--accent); margin-bottom: 1.5rem; transition: background 0.3s; }
+  .service-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1rem; transition: color 0.3s; }
+  .service-desc { font-size: 0.9rem; line-height: 1.7; color: var(--muted); font-weight: 300; transition: color 0.3s; }
+
+  .contact { display: grid; grid-template-columns: 1fr 1fr; }
+  .contact-left { padding: 6rem 3rem; border-right: 1.5px solid var(--border); }
+  .contact-eyebrow { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); font-weight: 400; margin-bottom: 1.5rem; display: block; }
+  .contact-headline { font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 800; line-height: 1; letter-spacing: -0.04em; }
+  .contact-headline em { font-style: normal; display: block; color: var(--accent); }
+  .contact-right { padding: 6rem 3rem; display: flex; flex-direction: column; }
+  .contact-link { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 0; border-bottom: 1px solid #E0DDD5; text-decoration: none; color: var(--ink); transition: color 0.2s; }
+  .contact-link:hover { color: var(--accent); }
+  .contact-link-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.25rem; }
+  .contact-link-value { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; }
+  .contact-arrow { font-size: 1.2rem; }
+  .contact-cta { margin-top: 3rem; display: inline-flex; align-items: center; gap: 0.75rem; background: var(--accent); color: #fff; font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 1rem 2rem; border: 2px solid var(--accent); cursor: pointer; text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s; width: fit-content; }
+  .contact-cta:hover { background: var(--ink); border-color: var(--ink); }
+
+  footer { padding: 2rem 3rem; border-top: 1.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--ink); }
+  .footer-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 800; color: var(--paper); letter-spacing: -0.02em; }
+  .footer-copy { font-size: 0.75rem; color: #666; letter-spacing: 0.05em; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-tag { animation: fadeUp 0.6s ease both; }
+  .hero-name { animation: fadeUp 0.7s 0.1s ease both; }
+  .hero-desc { animation: fadeUp 0.7s 0.2s ease both; }
+  .hero-stats { animation: fadeUp 0.7s 0.3s ease both; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">AA.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact" class="nav-cta">Let's talk</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div>
+      <div class="hero-tag">Available for projects</div>
+      <h1 class="hero-name">Arfan<br><em>Amrullah</em></h1>
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-desc">A designer crafting bold, intentional experiences that connect people with ideas.</p>
+      <div class="hero-scroll">Scroll</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual"><span class="hero-initials">AA</span></div>
+    <div class="hero-stats">
+      <div class="stat-block">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Years exp.</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-num">∞</span>
+        <span class="stat-label">Projects</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-num">30+</span>
+        <span class="stat-label">Clients</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Passion</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="section-label">About me</div>
+  <div class="about-content">
+    <h2 class="about-headline">Design that <span>means</span> something.</h2>
+    <p class="about-body">I'm Arfan — a visual and UX designer based in Indonesia with a passion for building brands and digital experiences that feel alive. I believe great design is never decoration; it's the invisible hand that guides, communicates, and converts.</p>
+    <p class="about-body" style="margin-top: 1rem;">From startups to established names, I've helped shape products people love to use and brands people remember.</p>
+    <div class="about-skills">
+      <span class="skill-tag">Brand Identity</span>
+      <span class="skill-tag">UI/UX Design</span>
+      <span class="skill-tag">Design Systems</span>
+      <span class="skill-tag">Motion Design</span>
+      <span class="skill-tag">Figma</span>
+      <span class="skill-tag">Prototyping</span>
+      <span class="skill-tag">Web Design</span>
+      <span class="skill-tag">Typography</span>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="work-header">
+    <h2>Selected Work</h2>
+    <span class="work-count">04 Projects</span>
+  </div>
+  <div class="work-grid">
+    <div class="work-card">
+      <div class="work-thumb t1">NOVA</div>
+      <div class="work-info"><span class="work-cat">Brand Identity</span><div class="work-title">Nova Studio — Brand System</div></div>
+    </div>
+    <div class="work-card">
+      <div class="work-thumb t2">FLOW</div>
+      <div class="work-info"><span class="work-cat">UI/UX Design</span><div class="work-title">Flow App — Mobile Experience</div></div>
+    </div>
+    <div class="work-card">
+      <div class="work-thumb t3">KOTA</div>
+      <div class="work-info"><span class="work-cat">Web Design</span><div class="work-title">Kota — Real Estate Platform</div></div>
+    </div>
+    <div class="work-card">
+      <div class="work-thumb t4">LUMI</div>
+      <div class="work-info"><span class="work-cat">Design System</span><div class="work-title">Lumi — Component Library</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="services-header"><h2>Services</h2></div>
+  <div class="services-list">
+    <div class="service-item">
+      <div class="service-num">01</div>
+      <div class="service-line"></div>
+      <div class="service-title">Brand Identity</div>
+      <p class="service-desc">Logo design, visual language, color systems, typography — everything that makes your brand unmistakably yours.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-num">02</div>
+      <div class="service-line"></div>
+      <div class="service-title">UI/UX Design</div>
+      <p class="service-desc">User research, wireframing, prototyping, and pixel-perfect interfaces that people actually enjoy using.</p>
+    </div>
+    <div class="service-item">
+      <div class="service-num">03</div>
+      <div class="service-line"></div>
+      <div class="service-title">Web Design</div>
+      <p class="service-desc">Landing pages, portfolios, and product sites designed to convert, impress, and stand apart from the crowd.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <span class="contact-eyebrow">Get in touch</span>
+    <h2 class="contact-headline">Let's make<br><em>something<br>great.</em></h2>
+  </div>
+  <div class="contact-right">
+    <a class="contact-link" href="mailto:arfanamrullah@gmail.com">
+      <div>
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-value">arfanamrullah@gmail.com</span>
+      </div>
+      <span class="contact-arrow">→</span>
+    </a>
+    <a class="contact-link" href="https://www.behance.net/arfanamrullah" target="_blank">
+      <div>
+        <span class="contact-link-label">Behance</span>
+        <span class="contact-link-value">behance.net/arfanamrullah</span>
+      </div>
+      <span class="contact-arrow">→</span>
+    </a>
+    <a class="contact-link" href="https://dribbble.com/arvanofsky" target="_blank">
+      <div>
+        <span class="contact-link-label">Dribbble</span>
+        <span class="contact-link-value">dribbble.com/arvanofsky</span>
+      </div>
+      <span class="contact-arrow">→</span>
+    </a>
+    <a class="contact-cta" href="mailto:arfanamrullah@gmail.com">Start a project →</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-name">Arfan Amrullah</span>
+  <span class="footer-copy">© 2026 — All rights reserved</span>
+</footer>
+
+</body>
+</html>
